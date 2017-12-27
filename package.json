@@ -1,0 +1,25 @@
+{
+  "name": "@rappopo/bdez",
+  "version": "0.0.1",
+  "description": "An ORM/ODM wannabe for Rappopo DAB",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha --exit"
+  },
+  "keywords": [
+    "orm",
+    "odm",
+    "dab",
+    "rappopo"
+  ],
+  "author": "Ardhi Lukianto <ardhi@lukianto.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "chai-as-promised": "^7.1.1",
+    "chai-subset": "^1.6.0"
+  },
+  "dependencies": {
+    "lodash": "^4.17.4"
+  }
+}

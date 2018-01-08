@@ -16,21 +16,21 @@ const Model = require('../model'),
 const schema = {
     name: 'testModel',
     schema: {
-      fields: [
-        { id: '_id', type: 'string' },
-        { id: 'name', type: 'text' }
-      ]
+      attributes: {
+        _id: { type: 'string' },
+        name: { type: 'text' }
+      }
     },
     dabName: 'test'
   },
   schemaValidated = {
     name: 'testModel',
     schema: {
-      fields: [
-        { id: '_id', type: 'string', validator: { required: true }},
-        { id: 'name', type: 'string', validator: { required: true }},        
-        { id: 'email', type: 'string', validator: { required: true, isEmail: true }},
-      ]
+      attributes: {
+        _id: { type: 'string', validator: { required: true }},
+        name: { type: 'string', validator: { required: true }},        
+        email: { type: 'string', validator: { required: true, isEmail: true }},
+      }
     },
     dabName: 'test'
   },

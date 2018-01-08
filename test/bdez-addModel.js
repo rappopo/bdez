@@ -51,9 +51,9 @@ describe('Bdez - addModel', function () {
     bdez.addModel({
       name: 'testModel',
       schema: {
-        fields: [
-          { id: 'name', type: 'text' }
-        ]
+        attributes: {
+          name: 'text'
+        }
       },
       dabName: 'none'
     }).asCallback(function (err, result) {
@@ -66,9 +66,9 @@ describe('Bdez - addModel', function () {
     bdez.addModel({
       name: 'testModel',
       schema: {
-        fields: [
-          { id: 'name', type: 'text' }
-        ]
+        attributes: {
+          name: 'text'
+        }
       },
       dabName: 'test'
     }).asCallback(function (err, result) {

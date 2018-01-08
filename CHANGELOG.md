@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.0
+
+* Updated to support dab@0.4.0
+
 ## 0.1.0
 
 * Updated to support dab@0.3.0

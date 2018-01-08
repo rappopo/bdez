@@ -16,10 +16,10 @@ const Model = require('../model'),
 const schema = {
     name: 'testModel',
     schema: {
-      fields: [
-        { id: '_id', type: 'string' },
-        { id: 'name', type: 'text' }
-      ]
+      attributes: {
+        _id: { type: 'string' },
+        name: { type: 'text' }
+      }
     },
     dabName: 'test'
   },

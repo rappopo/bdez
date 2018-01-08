@@ -37,9 +37,9 @@ describe('Bdez - delDab', function () {
       model = bdez.addDab('test', dab).addModel({
       name: 'testModel',
       schema: {
-        fields: [
-          { id: 'name', type: 'text' }
-        ]
+        attributes: {
+          name: { type: 'text' }
+        }
       },
       dabName: 'test'
     })

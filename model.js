@@ -18,7 +18,7 @@ class BdezModel {
     return new Promise((resolve, reject) => {
       if (_.isEmpty(options.name))
         return reject(new Error('Requires a name'))
-      if (_.isEmpty(options.schema.fields))
+      if (_.isEmpty(options.schema.attributes))
         return reject(new Error('Invalid schema'))
       let dab = this.bdez.dab[options.dabName]
       if (!dab) 
@@ -150,11 +150,11 @@ class BdezModel {
     let [params, body] = this.sanitize(oparams, obody)
     if (!_.has(params, 'ignoreColumn'))
       params.ignoreColumn = []
-    params.ignoreColumn.push(this.getDabCollection().attribId)
+    params.ignoreColumn.push(this.getDabCollection().srcAttribId)
 
-    _.each(this.getDabCollection().fields, f => {
-      if (!_.has(body, f.id))
-        params.ignoreColumn.push(f.id)
+    _.forOwn(this.getDabCollection().attributes, (f, id) => {
+      if (!_.has(body, id))
+        params.ignoreColumn.push(id)
     })
     params.ignoreColumn = _.uniq(params.ignoreColumn)
 

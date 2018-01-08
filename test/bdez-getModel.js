@@ -20,9 +20,9 @@ describe('Bdez - getModel', function () {
     bdez.addDab('test', dab).addModel({
       name: 'testModel',
       schema: {
-        fields: [
-          { id: 'name', type: 'text' }
-        ]
+        attributes: {
+          name: { type: 'text' }
+        }
       },
       dabName: 'test'
     }).asCallback(function(err, result) {

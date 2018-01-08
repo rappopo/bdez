@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.1.0
+
+* Updated to support dab@0.3.0
+
+## 0.0.3
+
+* Basic DAB & Model management
+* DAB proxying through Model
+* Hook support
+
+## 0.0.2
+
+* refactor: put back basic schema to @rappopo/dab
+
 ## 0.0.1
 
 * First commit

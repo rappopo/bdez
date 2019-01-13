@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.5.0
+
+* Updated to support dab@0.5.0
+* Added model behaviour
+
 ## 0.2.0
 
 * Updated to support dab@0.4.0

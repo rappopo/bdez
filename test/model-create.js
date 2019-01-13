@@ -23,6 +23,20 @@ const schema = {
     },
     dabName: 'test'
   },
+  schemaBehavior = {
+    name: 'testModel',
+    schema: {
+      attributes: {
+        _id: { type: 'string' },
+        name: { type: 'text' }
+      }
+    },
+    dabName: 'test',
+    behavior: {
+      createdAt: true,
+      updatedAt: true
+    }
+  },
   schemaValidated = {
     name: 'testModel',
     schema: {
@@ -73,6 +87,24 @@ describe('Model - create', function (done) {
         done()
       })
   })
+
+  it('should trigger behavior', function (done) {
+    dab = new DabMemory()
+    bdez = new Bdez()
+    bdez.addDab('test', dab).addModel(schemaBehavior)
+      .then(function(model) {
+        return model.create(body)
+      })
+      .then(function(result) {
+        expect(result).to.have.property('success').that.is.true
+        expect(result.data).to.have.property('_id', 'james-bond')
+        expect(result.data).to.have.property('name', 'James Bond')
+        expect(result.data).to.have.property('created_at')
+        expect(result.data).to.have.property('updated_at')
+        done()
+      })
+  })
+
 
   describe('beforeValidate Hook', function (done) {
     beforeEach(function (done) {

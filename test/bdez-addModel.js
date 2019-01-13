@@ -80,5 +80,29 @@ describe('Bdez - addModel', function () {
     })
   })
 
+  it('should add model behaviour correctly', function (done) {
+    bdez.addModel({
+      name: 'testModel',
+      dabName: 'test',
+      schema: {
+        attributes: {
+          name: 'text'
+        }
+      },
+      behavior: {
+        createdAt: true,
+        updatedAt: 'updated'
+      }
+    }).asCallback(function (err, result) {
+      expect(result.constructor.name).to.equal('BdezModel')
+      expect(result.dabName).to.equal('test')
+      expect(bdez.model).to.have.property('testModel')
+      expect(bdez.model.testModel).to.equal(result)
+      expect(result.behavior.createdAt).to.equal('created_at')
+      expect(result.behavior.updatedAt).to.equal('updated')
+      done()
+    })
+  })
+
 })
 

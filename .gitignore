@@ -3,5 +3,5 @@ npm-debug.log
 .node_history
 .DS_STORE
 .npmignore
-sftp-config.json
 package-lock.json
+coverage

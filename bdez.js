@@ -20,17 +20,19 @@ class BDez {
       if (dab instanceof Dab) {
         if (dab.constructor.name === 'Dab') throw new Error('Invalid DAB instance')
         dabInstance = dab
-      } else {
+      } else if (_.isPlainObject(dab)) {
         dabInstance = new (require(dab.dab))(dab.options)
+      } else {
+        throw new Error('Invalid DAB instance')
       }
       dabInstance.name = name
       this.dabs[name] = dabInstance
-      resolve(this)
+      resolve(dabInstance)
     })
   }
 
   getDab (name) {
-    if (!_.has(this.dabs, name)) return new Error('DAB not found')
+    if (!_.has(this.dabs, name)) throw new Error('DAB not found')
     return this.dabs[name]
   }
 

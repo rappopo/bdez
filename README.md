@@ -1,6 +1,6 @@
 # @rappopo/bdez
 
-An ORM/ODM wannabe for [Rappopo DAB](https://docs.rappopo.com/dab/)
+The one & only ORM/ODM for [Rappopo DAB](https://docs.rappopo.com/dab/)
 
 ## Links
 

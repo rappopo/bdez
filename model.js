@@ -19,17 +19,16 @@ class Model {
     schema = schema || {}
     schema.attributes = schema.attributes || {}
     schema.indexes = schema.indexes || {}
-    schema.hook = schema.hook || {}
+    schema.hook = schema.hook || []
     schema.behavior = schema.behavior || {}
     // behavior
     _.each(['createdAt', 'updatedAt'], item => {
       const col = _.snakeCase(item)
-      if (schema.behavior[item] === true && !_.has(schema.attributes, col)) {
+      if (schema.behavior[item] === true) {
         schema.attributes[col] = 'datetime'
         schema.behavior[item] = col
         schema.indexes[col] = true
-      }
-      if (_.isString(schema.behavior[item]) && _.keys(schema.attributes).indexOf(schema.behavior[item]) === -1) {
+      } else if (_.isString(schema.behavior[item])) {
         schema.attributes[schema.behavior[item]] = 'datetime'
         schema.indexes[schema.behavior[item]] = true
       }
@@ -43,6 +42,7 @@ class Model {
     return new Promise((resolve, reject) => {
       schema = this.normalizeSchema(schema)
       this.dab = dab
+      this.dabName = dab.name
       this.name = schema.name
 
       return new Promise((resolve, reject) => {
@@ -65,17 +65,17 @@ class Model {
   // hooks
 
   addHook (type, name = 'default', handler, priority = 1, override = false) {
-    if (!_.isFunction(handler)) return new Error('Requires a function handler')
-    if (hookTypes.indexOf(type) === -1) return new Error('Invalid type')
+    if (!_.isFunction(handler)) throw new Error('Requires a function handler')
+    if (hookTypes.indexOf(type) === -1) throw new Error('Invalid type')
     const existing = _.findIndex(this.hook, { name: name, type: type })
-    if (existing > -1 && !override) return new Error('Hook with such name and type already exists')
+    if (existing > -1 && !override) throw new Error('Hook with such name and type already exists')
     if (existing) this.hook[existing] = { name: name, type: type, handler: handler, priority: priority }
     return this
   }
 
   getHook (type, name = 'default') {
     const hook = _.find(this.hook, { type: type, name: name })
-    if (!hook) return new Error('No such hook found')
+    if (!hook) throw new Error('No such hook found')
     return hook
   }
 
@@ -89,7 +89,7 @@ class Model {
 
   deleteHook (type, name = 'default') {
     const existing = _.findIndex(this.hook, { type: type, name: name })
-    if (existing === -1) return new Error('No such hook found')
+    if (existing === -1) throw new Error('No such hook found')
     this.hook.splice(existing, 1)
     return this
   }

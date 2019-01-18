@@ -1,4 +1,5 @@
 const BDez = require('../index').BDez
+const _ = require('lodash')
 const DabMemory = require('@rappopo/dab-memory')
 
 let bdez
@@ -56,7 +57,7 @@ describe('BDez', () => {
   })
 
   describe('getDab', () => {
-    test('Should return error if not found', () => {
+    test('Should throw error if not found', () => {
       expect(() => {
         bdez.getDab()
       }).toThrowWithMessage(Error, 'DAB not found')
@@ -65,8 +66,30 @@ describe('BDez', () => {
       }).toThrowWithMessage(Error, 'DAB not found')
     })
 
-    test('Should return correct dab', () => {
+    test('Should return the correct dab', () => {
       expect(bdez.getDab('one')).toBeInstanceOf(DabMemory)
+    })
+  })
+
+  describe('deleteDab', () => {
+    test('Should return promise rejection if not found', async () => {
+      await bdez.deleteDab('nonexistent').catch(err => {
+        expect(err)
+          .toBeInstanceOf(Error)
+          .toContainEntry(['message', 'DAB not found'])
+      })
+    })
+
+    test('Should correctly remove dab and destroy all models attached to it', async () => {
+      await bdez.deleteDab('one')
+      expect(bdez.dabs).not.toContainKey('one')
+      const models = []
+      _.forOwn(bdez.models, m => {
+        if (m.dabName === 'one') models.push(m)
+      })
+      expect(models)
+        .toBeArray()
+        .toHaveLength(0)
     })
   })
 })

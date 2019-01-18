@@ -44,8 +44,8 @@ class BDez {
         if (v.dab.name === name) deleted.push(v.destroy(params))
       })
       Promise.all(deleted).then(result => {
-        delete this.dab[name]
-        resolve(this)
+        delete this.dabs[name]
+        resolve(true)
       }).catch(reject)
     })
   }
